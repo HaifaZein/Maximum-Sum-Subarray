@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" />
+
+    <title>Time Elapsed</title>
+</head>
+<body>
+    <div class="container mt-5">
+        <header class="d-flex justify-content-between align-items-center">
+            <div>
+                <h1>Exploring with Random Arrays</h1>
+            </div>
+        
+            <div>
+                <a class="btn btn-primary" href="/">Give your own array</a>
+            </div>
+        </header>
+        <hr>
+
+
+        <form method="post" action="/generate_and_run">
+            <div class="form-group">
+                <label for="array_size">Enter the size of the array (n):</label>
+                <input class="form-control" type="number" id="array_size" name="array_size" required min="1">
+            </div>
+            <div class="form-group">
+                <label for="algorithm">Select an algorithm:</label>
+                <select class="form-control" id="algorithm" name="algorithm" required>
+                    <option value="bruteforce">Brute Force</option>
+                    <option value="divideandconquer">Divide and Conquer</option>
+                    <option value="dynamicprogramming">Dynamic Programming</option>
+                    <option value="kaden">Kadane's Algorithm</option>
+                </select>
+            </div>
+
+            <button type="submit" class="btn btn-primary" >Submit</button>
+        </form>
+        <hr>
+        <br>
+        <div id="arr">
+            {% if result %}
+                <h4>Generated Random array:</h4>
+                <p>{{ arr }}</p>
+            {% endif %}
+        </div>
+        <div id="sum">
+            {% if result %}
+                <h4>Maximum Sum:</h4>
+                <p>{{ result[0] }}</p>
+            {% endif %}
+        </div>
+        <div id="subarray">
+            {% if result %}
+                <h4>Subarray:</h4>
+                {% if result[1] is iterable %}
+                    <p>{{ result[1] | join(', ') }}</p>
+                {% else %}
+                    <p>{{ result[1] }}</p>
+                {% endif %}
+            {% endif %}
+        </div>
+        <div id="time">
+            {% if result %}
+            <h4>Elapsed Time:</h4>
+            <p> {{ elapsed_time }} milliseconds</p>
+            {% endif %}
+        </div>
+    </div>
+</body>
+</html>
